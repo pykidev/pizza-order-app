@@ -1,0 +1,88 @@
+:root {
+  --theme-color: #f62300;
+  --theme-color-2: #f7e4e2;
+  --theme-color-3: #a96c68;
+  font-size: 16px;
+}
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 22px;
+}
+body {
+  /* var(--theme-color): #F62300; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  background-image: url("/src/assets/images/images/pizza_bg_image_2.jpg");
+  background-size: cover, contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* color: white; */
+  background-attachment: fixed;
+  height: 100vh;
+  padding: 0.7rem;
+  /*backdrop-filter: blur(3px);*/
+}
+
+a{
+  text-decoration: none;
+}
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 0.8rem;
+}
+
+main {
+  /* background-color: rgb(252, 249, 249); */
+  background-color: var(--theme-color-2);
+  border-radius: 0.2rem;
+  /* box-shadow: 0px 0px 10px rgb(224, 0, 2); */
+  color: #c45151;
+  max-width: 560px;
+  min-width: 300px;
+  /* padding: 0.2rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.container {
+  padding: 0.2rem;
+}
+
+input,
+select {
+  background-color: white;
+  border-radius: 0.15rem;
+  /* border-color: red; */
+  border: 1px solid red;
+  width: 98%;
+  border: 1px;
+  box-shadow: none;
+  padding: 0.2rem;
+  color: #cd7373;
+}
+
+button {
+  padding: 0.2rem;
+  width: 75%;
+  background-color: red;
+  /*margin: 0.2rem;*/
+  border: 1px solid #cd7373;
+  border-radius: 0.2rem;
+  color: white;
+  font-weight: 550;
+}
+
+div {
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+} 
