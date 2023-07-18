@@ -10,7 +10,7 @@ onMounted(fetchOrderData)
 
 async function fetchOrderData() {
 	try{
-		const response = await axios.get('http://127.0.0.1:8000/pizza_api/pizzas/')
+		const response = await axios.get('https://pykidev.pythonanywhere.com/pizza_api/pizzas/')
 		orderData.value = response.data
 		
 	} catch(error) {
@@ -20,7 +20,7 @@ async function fetchOrderData() {
 	
 
 function cancelOrder(orderID){
-	axios.delete(`http://127.0.0.1:8000/pizza_api/pizzas/order/${orderID}`)
+	axios.delete(`https://pykidev.pythonanywhere.com/pizza_api/pizzas/order/${orderID}`)
 	.then((response) => console.log(`Order ${orderID} has been cancelled`))
 	.catch((error) => console.error(error))
 	.finally(() => window.location.reload())

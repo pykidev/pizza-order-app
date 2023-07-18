@@ -4,7 +4,7 @@ import SuccessNotification from '../components/NotificationComp.vue'
 import OrderSummary from '../components/OrderSummaryComp.vue'
 import axios from 'axios'
 
-axios.get('http://127.0.0.1:8000/pizza_api/get_csrf_token/')
+axios.get('https://pykidev.pythonanywhere.com/pizza_api/get_csrf_token/')
 .then( response => {
 	const csrfToken = response.data.csrfToken
 	axios.defaults.headers.common['X-CSRFToken'] = csrfToken
@@ -47,7 +47,7 @@ function notShowOrderSummary(){
 
 function submitOrder(){
 	console.log(formData)
-	axios.post('http://127.0.0.1:8000/pizza_api/pizzas/', formData.value)
+	axios.post('https://pykidev.pythonanywhere.com/pizza_api/pizzas/', formData.value)
 	.then(response => {console.log(response)})
 	.catch(error => { console.error(error)})
 	showSuccess.value = true
