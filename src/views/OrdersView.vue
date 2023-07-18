@@ -1,28 +1,37 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import OrderView from '../components/OrderViewComp.vue'
+import axios from 'axios'
 
-const orderData = ref({
-	id : 1,
-	quantity : 1,
-	size : 1,
-	toppings : 'Pineapple',
-	add_ons : 'Fries',
-	delivery : false
-})
+const orderData = ref([])
+const dataRetrieved = ref(false)
 
-function cancelOrder(){
-	console.log("Order Cancelled")
+onMounted(fetchOrderData)
+
+async function fetchOrderData() {
+	try{
+		const response = await axios.get('http://127.0.0.1:8000/pizza_api/pizzas/')
+		orderData.value = response.data
+		
+	} catch(error) {
+		console.error(error)
+	}
+}
+	
+
+function cancelOrder(orderID){
+	axios.delete(`http://127.0.0.1:8000/pizza_api/pizzas/order/${orderID}`)
+	.then((response) => console.log(`Order ${orderID} has been cancelled`))
+	.catch((error) => console.error(error))
+	.finally(() => window.location.reload())
 }
 </script>
 
 <template>
 	<main>
 		<h1> Your Orders </h1>
-		<OrderView :data="orderData" @cancel-order="cancelOrder"/>
-		<OrderView :data="orderData" @cancel-order="cancelOrder"/>
-		<OrderView :data="orderData" @cancel-order="cancelOrder"/>
-		<OrderView :data="orderData" @cancel-order="cancelOrder"/>
+		<h3 v-if="orderData == []">You have no orders currently</h3>
+		<OrderView v-for="order in orderData" :data="order" :key="order.id" @cancel-order="cancelOrder"/>
 	</main>
 	<footer>
 		

@@ -4,17 +4,15 @@ import SuccessNotification from '../components/NotificationComp.vue'
 import OrderSummary from '../components/OrderSummaryComp.vue'
 import axios from 'axios'
 
-var fetchData = () => {
-	axios.get('https://jsonplaceholder.typicode.com/posts/1')
-	.then(function (response) {
-		//handle success
-		console.log(response);
-	})
-	.catch(function (error) {
-		//handle error
-		console.log(error);
-	})
-}
+axios.get('http://127.0.0.1:8000/pizza_api/get_csrf_token/')
+.then( response => {
+	const csrfToken = response.data.csrfToken
+	axios.defaults.headers.common['X-CSRFToken'] = csrfToken
+	console.log(csrfToken)
+})
+.catch( error => {
+	console.log(error)
+})
 
 const quantity = ref(1)
 const size = ref('Small')
@@ -49,7 +47,9 @@ function notShowOrderSummary(){
 
 function submitOrder(){
 	console.log(formData)
-	fetchData();
+	axios.post('http://127.0.0.1:8000/pizza_api/pizzas/', formData.value)
+	.then(response => {console.log(response)})
+	.catch(error => { console.error(error)})
 	showSuccess.value = true
 }
 </script>
@@ -62,7 +62,7 @@ function submitOrder(){
     <div>
 	  <SuccessNotification v-if="showSuccess"/>
 	  <OrderSummary :formData="formData" v-if="orderSummaryShow && !showSuccess" @back-event="notShowOrderSummary" @submit-event="submitOrder"/>
-      <form @submit.prevent="showOrderSummary" v-if="!orderSummaryShow && !showSuccess">
+      <form @submit.prevent="showOrderSummary" v-show="!orderSummaryShow && !showSuccess" >
 		<h1>Order Form</h1>
         <p>
           <label for="quantity"><strong>Quantity</strong></label>

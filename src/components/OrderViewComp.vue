@@ -1,5 +1,10 @@
 <script setup>
-	const props = defineProps(['data'])
+	const props = defineProps({
+		data : {
+			type : Object,
+			required : true,
+		}
+	})
 	console.log(props.data);
 </script>
 
@@ -23,12 +28,9 @@
         <p>
 			Delivery <span>{{data.delivery}}</span>
         </p>
-        <p>
-			Total Price <span>0</span>
-        </p>
 		
         <div id="btn_div">
-          <input type="button" value="Cancel Order" @click="$emit('cancelOrder')">
+          <input type="button" value="Cancel Order" @click="$emit('cancelOrder', data.id)">
         </div>
 	</div>
 </template>

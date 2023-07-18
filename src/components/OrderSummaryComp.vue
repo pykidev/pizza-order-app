@@ -21,9 +21,6 @@
         <p>
 			Delivery <span>{{formData.delivery}}</span>
         </p>
-        <p>
-			Total Price <span>0</span>
-        </p>
         <div id="btn_div">
 		  <input type="button" value="Confirm Order" id="confirmBtn" @click="$emit('submitEvent')">
           <input type="button" value="Back" @click="$emit('backEvent')">
